@@ -1,0 +1,545 @@
+\documentclass{beamer}
+\usetheme{Madrid}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{mathrsfs}
+\usepackage{hyperref}
+\usepackage[backend=bibtex,style=authoryear]{biblatex} % or numeric, alphabetic
+
+\title{Zero-Free Regions for Zeta and L-Functions}
+\subtitle{Classical Results and Extensions to Maass Forms}
+\author{Rudresh D.\ Gade }
+
+% \institute{Mathematics Department, IISER Pune}
+\date{09/10/2025}
+\def\T{\mathbb{T}}
+\def\F{\mathbb{F}}
+\def\A{\mathbb{A}}
+\def\H{\mathbb{H}}
+\def\Ker{\operatorname{Ker}}
+\def\Sym{\operatorname{Sym}}
+\def\Im{\operatorname{Im}}
+\def\Re{\operatorname{Re}}
+\def\deg{\operatorname{deg}}
+\def\End{\operatorname{End}}
+\def\Ext{\operatorname{Ext}}
+\def\Hom{\operatorname{Hom}}
+\def\Aut{\operatorname{Aut}}
+\def\re{\operatorname{re}}
+\def\im{\operatorname{im}}
+\def\Gal{\operatorname{Gal}}
+\def\id{\operatorname{id}}
+%\def\mod{\operatorname{mod}}
+\def\dim{\operatorname{dim}}
+\def\disc{\operatorname{disc}}
+\def\exp{\operatorname{exp}}
+\newtheorem{prop}[theorem]{Proposition}
+
+
+\begin{document}
+
+% Custom Title Page with perfectly centered block
+\begin{frame}[plain]
+  \vfill
+
+  \begin{center}
+    % makebox ensures the beamercolorbox is centered horizontally
+    \makebox[\textwidth][c]{%
+      \begin{beamercolorbox}[rounded=true,shadow=true,wd=0.75\textwidth,center]{title}
+        \centering
+        {\LARGE\bfseries Zero-Free Regions for Zeta and L-Functions}\\[0.3cm]
+        {\large Classical Results and Extensions to Maass Forms}
+      \end{beamercolorbox}%
+    }
+  \end{center}
+
+  \vfill
+
+  \begin{center}
+    {\large Rudresh D.\ Gade}\\[0.2cm]
+    {\large Supervisor: Dr. Kaneenika Sinha}\\[0.2cm]
+    {\large Expert: Dr. Alia Hamieh}\\[0.2cm]
+
+    Mathematics Department, IISER Pune\\[0.6cm]
+    {\large 09/10/2025}
+  \end{center}
+
+  \vspace*{0.5cm}
+\end{frame}
+
+\begin{frame}{Overview}
+\tableofcontents
+\end{frame}
+
+\section{Introduction and Motivation}
+
+\begin{frame}{The Riemann Zeta Function}{Introduction and Motivation}
+\begin{itemize}
+\item The Riemann zeta function is $\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s}$ for $\Re(s) > 1$
+\item It has an analytic continuation to entire complex plane except for simple pole at $s = 1$
+\item The Riemann Hypothesis: All non-trivial zeros lie on the critical line $\Re(s) = \frac{1}{2}$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Classical Zero-Free Regions}{Introduction and Motivation}
+\begin{theorem}[De la Vallée Poussin, 1896]
+There exists a constant $c > 0$ such that $\zeta(\sigma + it) \neq 0$ for 
+$$\sigma \geq 1 - \frac{c}{\log(|t| + 2)}$$
+\end{theorem}
+
+\vspace{0.5cm}
+
+\begin{itemize}
+\item This gives the first explicit zero-free region
+\item Improvements have focused on:
+  \begin{enumerate}
+  \item Better constants $c$
+  \item Improved lower bounds for $|t|$
+  \item Extensions to L-functions
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\section{Stechkin's Paper: Zeros of the Riemann Zeta Function}
+
+\begin{frame}{Stechkin's Main Result}
+\begin{theorem}[Stechkin, 1970]
+The Riemann zeta-function $\zeta(\sigma + it)$ has no zeros in the region
+$$\sigma \geq 1 - \frac{1}{R \ln t}$$
+for $t \geq T$, where $R = 9.65$ and $T = 12$.
+\end{theorem}
+
+\vspace{0.5cm}
+
+\begin{block}{Key Innovation}
+Stechkin's approach uses:
+\begin{itemize}
+\item Logarithmic derivative bounds for the gamma function
+\item Careful analysis of auxiliary parameters
+\item Non-negative trigonometric polynomials
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Auxiliary Parameter Technique}{Stechkin's Main Result}
+\begin{lemma}[Main Observation]
+Suppose $u \geq 0$, $0 < \alpha \leq \frac{1}{2}$, $\sigma > 1$, and $\tau = \frac{1}{2}\left(1 + \sqrt{1 + 4\sigma^2}\right)$. Then:
+\begingroup\small
+\[
+\frac{\sigma - \alpha}{(\sigma - \alpha)^2 + u} + \frac{\sigma - 1 + \alpha}{(\sigma - 1 + \alpha)^2 + u}
+\geq \frac{1}{\sqrt{5}}\left(\frac{\tau - \alpha}{(\tau - \alpha)^2 + u} + \frac{\tau - 1 + \alpha}{(\tau - 1 + \alpha)^2 + u}\right)
+\]
+\endgroup
+If $u =0$, then \[
+\frac{1}{\sigma - \alpha} \geq \frac{1}{\sqrt{5}}\left(\frac{1}{\tau - \alpha} + \frac{1}{\tau - 1 + \alpha}\right)
+\]
+\end{lemma}
+
+\vspace{0.3cm}
+
+\begin{block}{Remark}
+If $u =0$, then \[
+\frac{1}{\sigma - \alpha} \geq \frac{1}{\sqrt{5}}\left(\frac{1}{\tau - \alpha} + \frac{1}{\tau - 1 + \alpha}\right)
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}{The Main Lemma}{Stechkin's Main Result}
+\begin{lemma}[Lemma 1.3 - Core Estimate]
+Let $1 < \sigma \leq \frac{5}{4}$, $\sigma_1 = \frac{1}{2}\left(1 + \sqrt{1 + 4\sigma^2}\right)$, $s = \sigma + it$, $s_1 = \sigma_1 + it$, $t \geq T \geq 12$. Then:
+$$f(s) - xf(s_1) \leq \frac{1-x}{2} \ln t + A_3(T)$$
+where $f(s) = \Re\left(-\frac{\zeta'}{\zeta}(s)\right)$ and $x = \frac{1}{\sqrt{5}}$.
+
+If $\zeta(s)$ has a zero $\beta + it$ with $\beta > \frac{1}{2}$, then:
+$$f(s) - xf(s_1) \leq \frac{1-x}{2} \ln t - \frac{1}{\sigma - \beta} + A_3(T)$$
+\end{lemma}
+\end{frame}
+
+\begin{frame}{Trigonometric Polynomials Method}{Stechkin's Main Result}
+Stechkin uses non-negative trigonometric polynomials:
+$$p_n(\phi) = a_0 + a_1 \cos \phi + \cdots + a_n \cos n\phi$$
+
+with conditions:
+\begin{itemize}
+\item $p_n(\phi) \geq 0$ for all $\phi$
+\item $a_k \geq 0$ for $k = 0, 1, \ldots, n$  
+\item $a_0 < a_1$
+\end{itemize}
+
+\vspace{0.3cm}
+
+Define: $V(p_n) = \frac{p_n(0) - a_0}{(\sqrt{a_1} - \sqrt{a_0})^2} = \frac{a_1 + \cdots + a_n}{(\sqrt{a_1} - \sqrt{a_0})^2}$
+
+\vspace{0.3cm}
+
+The constant $V = \lim_{n \to \infty, p_n \in P_n} \inf V(p_n)$ determines the zero-free region.
+
+
+
+\end{frame}
+
+\begin{frame}{Stechkin's Specific Polynomial}{Stechkin's Main Result}
+Stechkin then used the following fact \[
+\Re\left(\frac{\zeta'}{\zeta}(s)\right) = \sum_{n=1}^{\infty} \frac{\Lambda(n)}{n^s}\cos(t\ln n) 
+\] to get the desired bounds.
+    The explicit polynomial used:
+$$p(\phi) = (0.28 + \cos \phi)^2(0.94 + \cos \phi)^2 $$.
+\end{frame}
+
+\section{McCurley's Paper: L-functions of Dirichlet Characters}
+
+\begin{frame}{McCurley's Extension to L-functions}
+% \begin{theorem}[McCurley, 1984]
+% Let $\chi_1$ and $\chi_2$ be distinct real primitive characters modulo $k_1$ and $k_2$, respectively, and let $\beta_i$ be a real zero of $L(s, \chi_i)$, $i = 1, 2$. Let
+% $$M_1 = \max\{k_1k_2/17, 13\} \quad \text{and} \quad R_1 = \frac{5-\sqrt{5}}{15-10\sqrt{2}}$$
+% Then: $\min\{\beta_1, \beta_2\} < 1 - \frac{1}{R_1 \log M_1}$
+% \end{theorem}
+\begin{theorem}
+    Let $M = \max (k, k|t|,10) $ and $R = 9.645908801$. Then $\mathcal{L}_k(s)$ has atmost one zero in the region \[
+    \left\{s: \sigma >1-\frac{1}{R\ln M} \right\}
+    \]
+    The only possible zero in this region is a simple real zero arising from an $L$-
+function formed with a real non-principal character modulo $k$ where  $\mathcal{L}_k(s)$  is the product of all Dirichlet $L$ function formed by  characters modulo k.
+\end{theorem}
+\vspace{0.3cm}
+
+\begin{block}{Significance}
+This extends zero-free regions from the Riemann zeta function to Dirichlet L-functions and implying that there is maximum one siegel zero
+\end{block}
+\end{frame}
+
+\begin{frame}{McCurley's Technical Framework}
+Key elements of McCurley's approach:
+
+\begin{itemize}
+\item \textbf{Cosine polynomial}: $P(\theta) = 8(0.9126 + \cos \theta)^2(0.2766 + \cos \theta)^2$
+\item \textbf{Auxiliary function}: $f(t,\chi) = \Re\left\{\frac{1}{\sqrt{5}}\frac{L'}{L}(\sigma_1 + it, \chi) - \frac{L'}{L}(\sigma + it, \chi)\right\}$
+\end{itemize}
+
+\vspace{0.3cm}
+
+\begin{block}{Innovation}
+McCurley's method adapts Stechkin's technique to handle:
+\begin{enumerate}
+\item Multiple L-functions simultaneously
+\item Conductor-dependent estimates
+\item Character-specific bounds
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\section{Introduction to Maass Forms}
+
+\begin{frame}{What are Maass Forms?}
+\begin{definition}[Maass Forms]
+A Maass form for a discrete subgroup $\Gamma$ of $\text{SL}_2(\mathbb{R})$ is a function $f: \mathcal{H}^* \to \mathbb{R}$ satisfying:
+\begin{enumerate}
+\item $f(\gamma z) = \left(\frac{\overline{cz+d}}{|cz+d|}\right)^k f(z)$ for all $\gamma = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \in \Gamma$
+\item $f$ is an eigenfunction of $\Delta_k = -y^2\left(\frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2}\right) + iky\frac{\partial}{\partial x}$
+\item $f(z) \ll y^N$ as $y \to +\infty$ for some positive integer $N$
+\end{enumerate}
+\end{definition}
+
+\vspace{0.3cm}
+
+\begin{block}{Key Difference}
+Unlike classical modular forms, Maass forms are not necessarily holomorphic.
+\end{block}
+We will be focusing on Maass forms with weight $k=0$.
+\end{frame}
+
+\begin{frame}{Fourier Expansion of Maass Forms}
+\begin{theorem}[Fourier Expansion]
+Let $f$ be a Maass form for $\text{SL}_2(\mathbb{Z})$ with eigenvalue $\lambda = \frac{1}{4} + r^2$. Then:
+$$f(z) = \sum_{n \neq 0} \lambda_f(n)\sqrt{y} K_{ir}(2\pi|n|y)e(nx)$$
+where:
+\begin{itemize}
+\item $\lambda_f(n) \in \mathbb{R}$ are eigenvalues of Hecke operators $T_n$
+\item $\lambda_f(1) = 1$ (normalization)
+\item $K_{ir}$ is the modified K-Bessel function
+\end{itemize}
+\end{theorem}
+
+\vspace{0.3cm}
+
+\begin{block}{L-function}
+The associated L-function  for $f$ is: $L(s,f) = \displaystyle\sum_{n=1}^{\infty} \frac{\lambda_f(n)}{n^s}$
+\end{block}
+\end{frame}
+\begin{frame}{Preliminaries for Maass Forms}
+    \begin{itemize}
+\item  It has been proven that $L(s,f)$ is convergent for $\Re(s)>1$.
+\item The completed $L$ function is \[
+\Lambda(s,f) = \pi^{-s} \Gamma\left(\frac{s+\epsilon +ir}{2}\right)\Gamma\left(\frac{s+\epsilon -ir}{2}\right)L(s,f)
+\] where $\epsilon = 0 \textit{ or }1$ depending on $f$ being even or odd, respectively and $\lambda$ is the eigen value of $f$ with $\lambda = \frac{1}{4} + r^2$.
+\end{itemize}
+\end{frame}
+\section{Zero-Free Regions for L-functions of Maass Forms}
+
+% \begin{frame}{General Framework for L-functions}
+% Consider a Dirichlet series $\varphi(s) = \sum_{n=1}^{\infty} \frac{a_n}{n^s}$ with:
+% \begin{itemize}
+% \item Non-negative coefficients $a_n$
+% \item Convergent for $\Re(s) > 1$
+% \item Pole of order $m$ at $s = 1$
+% \end{itemize}
+
+% Define the completed L-function:
+% $$\Lambda(s,\varphi) = s^m(1-s)^m D^s \prod_{i=1}^l \Gamma\left(\frac{s+c_i}{2}\right) \varphi(s)$$
+
+% where $D > 0$ and $c_i = a_i + b_it$ with $\sigma + a_i > 0$.
+
+% \vspace{0.3cm}
+
+% \begin{block}{Hadamard Factorization}
+% $$\Lambda(s,\varphi) = e^{A+Bs} \prod_{\rho} \left(1 - \frac{s}{\rho}\right) e^{s/\rho}$$
+% \end{block}
+% \end{frame}
+\begin{frame}{Preliminaries for Maass Forms}
+   Let $f$ be a Hecke eigenform  for $\mathrm{SL}_2(\mathbb{Z})$, normalized so that the first Fourier coefficient is $1$. For each prime $p$, the eigenvalue of $f$ for the Hecke operator $T_p$ is denoted $\lambda_f(p)$.
+
+The \textbf{Satake parameters} of $f$ at $p$ are the pair of (possibly complex) numbers $\alpha_p$ and $\alpha_p^{-1}$ defined by
+\[
+\lambda_f(p) = \alpha_p + \alpha_p^{-1}, \qquad \alpha_p \alpha_p^{-1} = 1.
+\]
+Equivalently, the standard $L$-function attached to $f$ has the Euler product
+\[
+L(s, f) = \prod_p \left(1 - \alpha_p p^{-s}\right)^{-1} \left(1 - \alpha_p^{-1} p^{-s}\right)^{-1}.
+\]
+
+
+\end{frame}
+\begin{frame}{Preliminaries for Maass Forms}
+\begin{definition}[Symmetric Power $L$ - function]
+For each integer $m \geq 1$, the $m$-th symmetric power $L$-function of $f$ is given by
+\[
+L(s, \operatorname{Sym}^m f) := L(s,f,r_m) = \prod_p \prod_{j=0}^m (1 - \alpha_p^{m - 2j} p^{-s})^{-1}.
+\]
+This $L$-function encodes the arithmetic of the $m$-th symmetric power representation of the local parameter at $p$.
+    
+\end{definition} 
+   We also define the Dirichlet series for  symmetric power $L$ - functions as 
+\[
+L(s,\Sym^mf):=\sum_{n=1}^\infty \frac{\lambda_{\Sym^mf}(n)}{n^s} \quad \Re(s)> c
+\]
+
+The gamma factors for the symmetric power $L$- function are 
+\[
+\gamma(s,\Sym^m f )= \prod_{j=0}^m \Gamma(\frac{s-(m-2j)ir}{2}) \quad,\quad  \lambda=\frac{1}{4}+r^2
+\]    
+\end{frame}
+\begin{frame}{Preliminaries for Maass Forms}
+We know that the completed L function $\Lambda(s,\Sym^mf)$is entire and has functional equation as \[
+\Lambda(s,\Sym^mf) = Q_m^s\gamma(s,\Sym^mf)L(s,\Sym^mf) 
+\] 
+\[
+\Lambda(s,\Sym^mf)= \epsilon_{\Sym^mf}\Lambda(1-s,\Sym^mf)  
+\]
+with $\epsilon_{\Sym^mf} \in \{\pm 1\} $ and 
+\[
+Q_i = \pi^{\frac{-(i+1)}{2}}
+\].
+   We also define the following Dirichlet series as 
+\begin{align*}
+      L_{(0)}(s,f)&= L(s,\Sym^0f)=\zeta(s)\\
+L_{(1)}(s,f)&= L(s,f)\\
+L_{(2)}(s,f)&= L(s,\chi_0)L(s,\Sym^2f)\\
+L_{(3)}(s,f)&= L(s,\Sym^3f)L(s,f)^2\\
+L_{(4)}(s,f)&= L(s,\chi_0)^2L(s,\Sym^2f)^3L(s,\Sym^4f) 
+\end{align*}
+\end{frame}
+\begin{frame}{Preliminaries for Maass Forms}
+As in \cite{IPENT}, we consider a polynomial of form $P(\theta) = \gamma(a+\cos \theta)^2(b+\cos\theta)^2 = \displaystyle\sum_{i=0}^4 a_i\cos(i\theta)$ where 
+\begin{align*}
+    a_0 &= \frac{\gamma}{2}\left( \frac{3}{4} + 4ab+b^2+a^2(1+2b^2)\right)\\
+    a_1 &= \frac{\gamma}{2}(a+b)(3+4ab)\\
+    a_2 &=\frac{\gamma}{2}(1+a^2+4ab+b^2)\\
+    a_3 &= \frac{\gamma}{2}(a+b)\\
+    a_4 &= \frac{\gamma}{8}
+\end{align*}
+For $ n = 0 , 1 , 2 , 3 , 4 $ we define the auxiliary functions $j_{f,n}(\sigma,t)$ as follows: 
+\[
+j_{f,n}(\sigma,t) = \Re\left( \frac{1}{\sqrt{5}}\frac{L'_{(n)}}{L_{(n)}} (\sigma_1+it,f)-\frac{L'_{(n)}}{L_{(n)}} (\sigma+it,f) \right)
+\]
+\end{frame}
+\begin{frame}{Preliminaries for Maass Forms}
+    We find upper bound for $j_{f,n}(\sigma,mt)$ for $ (n,m) = \{ (0,0),(2,0),(4,0),(1,1),(3,1),(2,2),(4,2),(3,3),(4,4)\} $ as \[
+    j_{f,n}(\sigma,mt)< j_{f,n}^M(\sigma,mt) +j_{f,n}^E(\sigma,mt)
+    \]
+\begin{block}{Proposition}
+     Let $\sigma>1$ and $t \in \mathbb{R}$, then 
+    \begin{multline*}
+        0\leq 8a^2b^2j(\sigma,0) + (a_2-4)j_{f,2}(\sigma,0)+3j_{f,4}(\sigma,0) +(a_1-3a_3)j_f(\sigma,t) \\+ 3a_3j_{f,3}(\sigma,t) + (a_2-4)j_{f,2}(\sigma,2t) + 4j_{f,4}(\sigma,2t) + a_3j_{f,3}(\sigma,3t) + j_{f,4}(\sigma,4t) 
+    \end{multline*} 
+\end{block}
+
+\end{frame}
+\begin{frame}{Main Result for Maass Forms}
+\begin{theorem}
+        Let $f$ be an even Maass form and \[A(t) = \left(\max \left(\left( \frac{\phi^2}{4} + 4(|t|+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4t^2 \right) \right)\right)\]. Then there exists a constant $c > 0$ such that the $L$-function $L(s,f)$ has no zeros in the region
+    
+        \[
+        \sigma \geq 1 - \begin{cases}
+        \frac{1}{10.220267750315\ln A(1)} & : |t| < \frac{0.2}{\ln A(1)}\\
+        \frac{1}{9.37747\ln A(1)} & : 1>|t| \geq \frac{0.2}{\ln A(1)}\\
+        \frac{1}{10.220267750315\ln A(t)} & : |t| \geq 1
+        \end{cases}
+        \]
+    \end{theorem}
+
+\end{frame}
+
+\begin{frame}{Main Result for Maass Forms}
+    We divide our region for $|t|$ in 3 parts:
+    \begin{enumerate}
+        \item $|t|\geq 1$
+        \item $ \frac{\gamma}{\ln \left(\max \left(\left( \frac{\phi^2}{4} + 4(1+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4 \right) \right)\right)}\leq|t|<1$
+        \item $\frac{\gamma}{\ln \left(\max \left(\left( \frac{\phi^2}{4} + 4(1+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4 \right) \right)\right)}>|t|$
+    \end{enumerate}
+ where $\gamma $ is chosen later appropriately.
+    \\For the first case, using the bounds for $j_{f,n}(\sigma,mt)$ and the above proposition, we the following inequality,
+\end{frame}
+\begin{frame}{Main Result for Maass Forms}
+\begin{multline*}
+    \frac{a_1+3a_3}{\sigma-\beta_0  } \leq \frac{8a^2b^2+a_2+2}{\sigma-1} + \Big[ \frac{(a_2-4)\kappa}{2} + \frac{15\kappa}{2} + \frac{(a_1-3a_3)\kappa}{2}  \\+6a_3\kappa  + \frac{5(a_2-4)\kappa}{4} +18\kappa+  2a_3\kappa + \kappa\\ + \frac{7\kappa}{2} \Big]  \ln \left(\max \left(\left( \frac{\phi^2}{4} + 4(|t|+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4t^2 \right) \right)\right) \\  -a^2b^28(0.601655) -(a_2-4)(0.8388)-3(2.23195)\\ -(a_1-3a_3)(0.08) -3a_3(0.320018)-(a_2-4)(0.14654)\\ - 4(0.0019669) +a_3(1.927202)-0.073063
+\end{multline*}   
+\end{frame}
+
+\begin{frame}{Main Result for Maass Forms}
+    For $(a,b) = (1.5315,0.374949)$, we get \begin{multline*}
+    K(a,b) =   -a^2b^28(0.601655) -(a_2-4)(0.8388)-3(2.23195)\\ -(a_1-3a_3)(0.08) -3a_3(0.320018)-(a_2-4)(0.14654) - 4(0.0019669) \\+a_3(1.927202)-0.073063  =  -21.2415181449608<0
+\end{multline*}
+We choose $$\sigma = 1+\frac{x}{\ln \left(\max \left(\left( \frac{\phi^2}{4} + 4(|t|+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4t^2 \right) \right)\right)}$$ where $x$ is chosen later appropriately. 
+With some analysis, we get \[
+\beta_0 \leq 1-\frac{1}{10.220267750315\ln \left(\max \left(\left( \frac{\phi^2}{4} + 4(|t|+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4t^2 \right) \right)\right) }
+\]
+\end{frame}
+\begin{frame}{Main Result for Maass Forms}
+    For the second part of $|t|$, we use the following lemma.
+    \begin{block}{Lemma}
+            For $\sigma>1$ we have\[
+    0\leq j_{f,0}(\sigma,0) -2j_{f,1}(\sigma,0) +j_{f,2}(\sigma,0) 
+    \]
+    \end{block}
+Using the bounds, we get \begin{multline*}
+    0 \leq \frac{2}{\sigma-1}-\frac{4(\sigma-\beta_0)}{(\sigma-\beta_0)^2+t_0^2}+\\ \frac{\kappa}{2}\ln\left(\max \left(\left( \frac{\phi^2}{4} + 4(1+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4 \right) \right)\right) 
+\end{multline*}
+\end{frame}
+\begin{frame}{Main Result for Maass Forms}
+    where $t_0 = \frac{\gamma}{\ln\left(\max \left(\left( \frac{\phi^2}{4} + 4(1+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4 \right) \right)\right)}$.\\
+    We set $$\sigma = 1+\frac{r_1}{\ln\left(\max \left(\left( \frac{\phi^2}{4} + 4(1+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4 \right) \right)\right) }$$ and $$\beta_0 = 1-\frac{c}{\ln\left(\max \left(\left( \frac{\phi^2}{4} + 4(1+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4 \right) \right)\right)   }$$ for some $r_1,c >0$
+and get \[
+\frac{4(r_1+c)}{(r_1+c)^2+\gamma^2} < \frac{4+kr_1}{2r_1}
+\]
+
+\end{frame}
+\begin{frame}{Main Result for Maass Forms}
+    We solve for $c>0$ and choosing $\gamma = 0.2$ and $r_1 = 1$, we get 
+\[
+c\geq \frac{1}{10.220267750315 }
+\]
+    Finally for the last part, we again use the same proposition as in part 1 and using the bounds we get,
+    \begin{multline*}
+    0 < \frac{8a^2b^2+a_2+2}{\sigma-1} - \frac{a_1+3a_3}{\sigma-\beta_0} - \frac{2a_3(\sigma-\beta_0)}{(\sigma-\beta_0)^2+4t^2} +\frac{(a_2+4)(\sigma-1)}{(\sigma-1)^2 + 4t^2}\\ + \frac{2(\sigma-1)}{(\sigma-1)^2 + 16t^2}+ \left[ 23+\frac{a_1}{2}+\frac{7a_2}{4} + \frac{13a_3}{2}\right]\\\kappa\ln\left(\max \left(\left( \frac{\phi^2}{4} + 4(1+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4 \right) \right)\right)  \\ -8a^2b^2(0.601655) -(a_2-4)(0.8388)-3(2.23195) -(a_1-3a_3)(0.08)\\ -3a_3(0.320018)-(a_2-4)(0.189189) - 4(0.08725) +a_3(1.927202)-0.08725
+\end{multline*}
+
+\end{frame}
+\begin{frame}{Main Result for Maass Forms}
+    Let 
+\begin{multline*}
+    D(a,b) = -8a^2b^2(0.601655) -(a_2-4)(0.8388)-3(2.23195)\\ -(a_1-3a_3)(0.08) -3a_3(0.320018)-(a_2-4)(0.189189) - 4(0.08725) \\+a_3(1.927202)-0.08725
+\end{multline*}
+Now $D(1.5315,0.374949) = -51.8056996464467< 0 $.\\
+    Now we set  \[
+\sigma = 1+\frac{r_2}{\ln\left(\max \left(\left( \frac{\phi^2}{4} + 4(1+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4 \right) \right)\right) }
+\] and we already have 
+\[
+\beta_0 = 1-\frac{c}{\ln\left(\max \left(\left( \frac{\phi^2}{4} + 4(1+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4 \right) \right)\right) }
+\]
+\end{frame}
+\begin{frame}{Main Result for Maass Forms}
+  Simplifying the above inequality and removing the $\log$ term, we get 
+\[
+ \frac{A}{r_2+c} \leq \frac{B}{r_2} + C + \frac{a_2+4}{r_2^2+4\gamma^2} - \frac{2a_3(r_2+c)}{(r_2+c)^2 +4\gamma^2} +\frac{2r_2}{r_2^2+16\gamma^2} 
+\]
+where $A = a_1+3a_3$, $B = 8a^2b^2+a_2+2$, $C = \left[ 23+\frac{a_1}{2}+\frac{7a_2}{4} + \frac{13a_3}{2}\right]\kappa$.\\
+For $\delta$ chosen such that \begin{equation} \label{58}
+    \frac{a_2+4}{r_2^2+4\gamma^2} - \frac{2a_3(r_2+c)}{(r_2+c)^2 +4\gamma^2} +\frac{2r_2}{r_2^2+16\gamma^2} -\delta <0
+\end{equation}
+    Solving for $c>0$ and choosing $\delta = 8.26247$ we get $c= \frac{1}{9.37747}$ 
+%     \[
+% c>\frac{(A-B)r_2-Cr_2^2-\delta r_2^2}{B+Cr_2+\delta r_2}
+% \]
+% \begin{multline*}
+%     \frac{(a_2+4)(\sqrt{AB}-B)(C+\delta)}{(\sqrt{AB}-B)^2 + 4\gamma^2(C+\delta)^2} + \frac{(2)(\sqrt{AB}-B)(C+\delta)}{(\sqrt{AB}-B)^2 + 16\gamma^2(C+\delta)^2} \\- \frac{(2a_3)(A-\sqrt{AB})(C+\delta)}{(A-\sqrt{AB})^2 + 4\gamma^2(C+\delta)^2} -\delta <0
+% \end{multline*}
+
+This is satisfied if we take $\delta = 8.26247$ and get $c = \frac{1}{9.37747}$
+
+
+\end{frame}
+\begin{frame}{Final result for Maass forms}
+    Thus combining all the three parts, we get the final result as 
+    \begin{theorem}
+        Let $f$ be an even Maass form and \[A(t) = \left(\max \left(\left( \frac{\phi^2}{4} + 4(|t|+|r|)^2\right),\left( \left(\frac{\phi+2}{2}\right)^2 +4t^2 \right) \right)\right)\]. Then there exists a constant $c > 0$ such that the $L$-function $L(s,f)$ has no zeros in the region
+    
+        \[
+        \sigma \geq 1 - \begin{cases}
+        \frac{1}{10.220267750315\ln A(1)} & : |t| < \frac{0.2}{\ln A(1)}\\
+        \frac{1}{9.37747\ln A(1)} & : 1>|t| \geq \frac{0.2}{\ln A(1)}\\
+        \frac{1}{10.220267750315\ln A(t)} & : |t| \geq 1
+        \end{cases}
+        \].
+    \end{theorem}
+\begin{block}{Remark}
+    This result is only true for even Maass forms with weight $k = 0$, as the gamma factors of completed $L$ functions are different for odd Maass forms, and we get a slightly different result.
+\end{block}
+\end{frame}
+\section{Comparison and Applications}
+
+% \begin{frame}{Comparison of Methods}
+% \begin{block}{Common Features}
+% \begin{itemize}
+% \item Logarithmic derivative method
+% \item Auxiliary parameter technique
+% \item Trigonometric polynomial optimization
+% \item Gamma function estimates
+% \end{itemize}
+% \end{block}
+% \end{frame}
+
+\begin{frame}{Applications and Future Directions}
+\textbf{Applications of Zero-Free Regions:}
+\begin{itemize}
+\item Prime number theorem error terms
+\item Bounds for coefficients of L-functions
+\item Distribution of eigenvalues
+\end{itemize}
+
+\vspace{0.5cm}
+
+\textbf{Open Problems:}
+\begin{itemize}
+\item Extend to odd Maass forms
+\item Extension to higher level
+\item Higher rank groups $(GL(n))$
+
+\end{itemize}
+\end{frame}
+\begin{frame}
+\begin{center}
+\Large \textbf{Thank you for your attention!}
+\end{center}
+\end{frame}
+
+\begin{frame}{References}
+\footnotesize
+\begin{itemize}
+\item Stechkin, S.B.: The zeros of the Riemann zeta-function. Mat. Zametki 8 (1970), 419-429
+\item McCurley, K.S.: Explicit zero-free regions for Dirichlet L-functions. J. Number Theory 19 (1984), 7-32
+\item Creech, S., Hamieh, A., Khunger, S., Sinha, K., Streipel, J., Tsang, K.M.: Explicit zero-free regions for automorphic L-functions. arXiv preprint arXiv:2402.07602 (2024)
+\end{itemize}
+\end{frame}
+\end{document}

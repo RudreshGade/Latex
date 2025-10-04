@@ -1,0 +1,662 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{multirow,booktabs}
+\usepackage[table]{xcolor}
+\usepackage{layout}
+\usepackage[margin=.5in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{empheq}
+\usepackage{hyperref}
+\usepackage{theoremref}
+\usepackage{blindtext}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,% Requires: \usepackage{amsmath}
+    pdftitle={Probability Notes},
+    pdfauthor={Rudresh D. Gade},
+    pdfpagemode=FullScreen,
+    }
+
+\graphicspath{ {./images/} }
+\newenvironment{proof}{\paragraph{Proof:}}{\hfill$\square$}
+\newenvironment{solution}{\paragraph{Solution:}}{\hfill$\square$}
+\newenvironment{exercise}{\paragraph{Exercise:}}
+
+\newenvironment{example}{\paragraph{Example:}}{\hfill $\blacklozenge $}
+\newcommand{\f}{$\mathbb{F}$}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+
+\newcommand\note[1]{\textcolor{blue}{#1}}
+
+\begin{document}
+
+\title{Probability Notes}
+\author{Rudresh D. Gade}
+\date{\today}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Measure Theory Revision and some new concepts}
+
+\subsection{$\sigma$-Algebra}
+If $E$ is the collection of sets which we can measure, then desirably:
+\[A \in E \implies A^c \in E\]
+\[A_1, A_2, \dots \in E \implies A = \bigcup_{i} A_i \quad (\omega \in A \iff \omega \in A_i \ \text{for some} \ i)\]
+\begin{itemize}
+    \item $E$: $\sigma$-algebra on $\Omega \ (\neq \emptyset)$
+    \item $E \subseteq \mathcal{P}(\Omega) = 2^{\Omega}$
+    \item $\emptyset \in E$
+    \item $A \in E \implies A^c \in E$
+    \item $\{A_n\}_{n=1}^{\infty} \in E \implies \bigcup_{n=1}^{\infty} A_n \in E$
+\end{itemize}
+
+\subsection{Measurable Space and Measure}
+$(\Omega, E)$ is a measurable space. A function $\mu : E \to [0, \infty]$ is called a measure if:
+\begin{itemize}
+    \item $\mu(\emptyset) = 0$
+    \item If $\{A_n\} \subseteq E$ and $A_n$ are disjoint, then
+    \[    \mu\left( \bigcup_{n \geq 1} A_n \right) = \sum_{n=1}^{\infty} \mu(A_n)  \]
+\end{itemize}
+
+\subsection{Probability Space}
+A probability space $(\Omega, F, P)$ where $F$ is $\sigma(\Omega)$ satisfies:
+\begin{itemize}
+    \item $P$ is a measure on $(\Omega, F)$
+    \item $P(\Omega) = 1$
+\end{itemize}
+
+\subsection{Lebesgue Measure (1D)}
+The Lebesgue measure on an interval $(a, b)$ is given by $\ell(a, b) = b - a$. The measurable space is $( \mathbb{R}, \mathcal{P}(\mathbb{R}))$, and
+\[m^* : \mathcal{P}(\mathbb{R}) \to [0, \infty] \text{ is given by    } \\
+m^*(A) = \inf \left( \sum \ell(I_i) \ \bigg|\ A \subseteq \bigcup_i I_i \right)\]
+
+\subsection{Lebesgue $\sigma$ -Algebra}
+Consider
+\[M := \{ E \subseteq \mathbb{R} \ | \ m^*(A) = m^*(A \cap E) + m^*(A \setminus E) \ \forall A \subseteq \mathbb{R} \}\]
+Then:
+\begin{itemize}
+    \item $M$ is a $\sigma$-algebra (Lebesgue $\sigma$-algebra)
+    \item $m^*|_M = m$ is a measure on $(\mathbb{R}, M)$ (Lebesgue measure)
+    \item Every open set is in $M$
+    \item $m((a, b)) = b - a$
+\end{itemize}
+
+\subsection{Borel $\sigma$-Algebra}
+The Borel $\sigma$-algebra of $\mathbb{R}$ is:
+\[
+\mathcal{B}(\mathbb{R}) = \text{The smallest } \sigma\text{-algebra containing all open sets of } \mathbb{R}
+\]
+
+\subsection{Null Sets and Negligible Sets}
+A \textbf{null} set is defined as follows: If $A \in M$ such that $m(A) = 0$, then $A$ is a null set. Every subset of $A$ is called a negligible set.
+
+\subsection{Complete Measure Space}
+A measure space $(\Omega, F, \mu)$ is complete if all \textbf{$\mu$-negligible sets} are in $F$.
+
+\begin{example}
+    \begin{itemize}
+        \item $(\mathbb{R}, M, m)$ is complete.
+        \item $(\mathbb{R}, \mathcal{B}(\mathbb{R}), m)$ is incomplete.
+    \end{itemize}
+        
+\end{example}
+
+\subsection{Lebesgue Measurable Functions}
+A function $f : \Omega \to \mathbb{R}$ is called \textbf{Lebesgue measurable} if:
+\[f^{-1}(B) \in M \quad \forall B \in \mathcal{B}(\mathbb{R})\]
+
+\subsection{Borel Measurable Functions}
+A function $f : \Omega \to \mathbb{R}$ is called \textbf{Borel measurable} if:
+\[f^{-1}(B) \in \mathcal{B}(\mathbb{R}) \quad \forall B \in \mathcal{B}(\mathbb{R})\]
+
+\subsection{Measurable Functions between Measurable Spaces}
+If $f : \Omega_1 \to \Omega_2$ where $(\Omega_1, F_1)$ and $(\Omega_2, F_2)$ are measurable spaces, then $f$ is called measurable if:
+\[f^{-1}(B_2) \in F_1 \quad \forall B_2 \in F_2\]
+
+\subsection{Random Variables and Probability Space}
+Let $\Omega$ be the sample space, $F$ the $\sigma$-algebra of events, and $P$ the probability measure.
+\begin{itemize}
+    \item $A$ is an event: $A \in F$.
+    \item $P(A)$: Probability of $A$, which is the measure of $A$ under $P$.
+    \item Event space: $\sigma$-algebra $F$.
+    \item $X$ is a random variable: $X : \Omega \to \mathbb{R}$ is a measurable function.
+    \item $\mathbb{E}[X]$: Expectation of $X$, computed as the integral over $\Omega$.
+    \item Integration: $\int X(\omega) P(d\omega)$ represents the expected value of $X$.
+\end{itemize}
+
+\subsection{Vagueness in Statements of Random Variables}
+\begin{enumerate}
+    \item Statement: "X = 0" is vague. Does it mean $X(\omega) = 0 \ \forall \ \omega \in \Omega$?
+    \item $P(X = 0) = 1$ means $P\{\omega : X(\omega) = 0\} = 1$, or equivalently $X = 0$ almost surely (a.s.).
+    \item If $X = 0 \ \forall \ \omega$, then $X = 0$ a.s.
+\end{enumerate}
+
+\subsection{Example of a Random Variable}
+Consider the probability space $([0, 1], \mathcal{B}([0,1]), m)$ where $m$ is the Lebesgue measure.
+\[X(\omega) = \mathbf{1}_{\{0\}}(\omega) = 
+\begin{cases} 
+1, & \text{if } \omega = 0 \\
+0, & \text{else}.
+\end{cases}
+\]
+Then,
+\[P(X = 0) = m((0, 1]) = 1.\]
+
+\subsection{Notion of Convergence}
+Let $(\Omega, F, P)$ be a probability space and $\{X_n\} : \Omega \to \mathbb{R}$ be a sequence of measurable random variables.
+\begin{itemize}
+    \item We say $X_n \to X$ a.s. (almost surely), if $P\{\omega : X_n(\omega) \to X(\omega)\} = 1$. In other words, for any $\varepsilon > 0$:
+    \[    P\left( \bigcup_{N=1}^{\infty} \bigcap_{n=N}^{\infty} \left\{\omega : |X_n(\omega) - X(\omega)| > \varepsilon\right\} \right) = 0.\]
+    \item This implies:
+    \[    \lim_{N \to \infty} P\left( \bigcap_{n=N}^{\infty} \left\{\omega : |X_n(\omega) - X(\omega)| > \varepsilon\right\} \right) = 0.\]
+\end{itemize}
+
+\subsection{Weaker Version: Convergence in Probability}
+\begin{itemize}
+    \item We say that $X_n \to X$ in probability, or write $X_n \xrightarrow{P} X$, if for any $\varepsilon > 0$:
+    \[    \lim_{N \to \infty} P\left(\left\{\omega : |X_N(\omega) - X(\omega)| > \varepsilon\right\}\right) = 0.    \]
+\end{itemize}
+
+\subsection{Indicator Function}
+Let $(\Omega, F, P)$ be a measure space, and let $E \in F$. The indicator function of $E$ is defined as:
+\[
+\mathbf{1}_E(\omega) = 
+\begin{cases} 
+1, & \text{if } \omega \in E \\
+0, & \text{else}.
+\end{cases}
+\]
+This is a measurable function.
+
+\begin{itemize}
+    \item For disjoint sets $E$ and $B$: 
+    \[    \mathbf{1}_E + \mathbf{1}_B = \mathbf{1}_{E \cup B}    \iff E\cap B = \phi.\]
+    \[    \mathbf{1}_E \mathbf{1}_B = \mathbf{1}_{E \cap B}.\]
+\end{itemize}
+
+\subsection{Simple Function}
+Let $E_i \in F$ for $i = 1, \dots, n$, and consider $X(\omega) := \sum_{i=1}^n C_i \mathbf{1}_{E_i}(\omega)$, where $C_1, \dots, C_n$ are real constants. This is called a \textbf{simple function}.
+
+\subsection{Integration}
+\begin{itemize}
+    \item If $E \in F$, the integral of $\mathbf{1}_E$ with respect to $P$ is given by:
+    \[\int \mathbf{1}_E \, dP := P(E).\]
+    \item If $X(\omega)$ is a simple function, i.e., $X(\omega) = \sum_{i=1}^n C_i \mathbf{1}_{E_i}(\omega)$, then:
+    \[\int X(\omega) dP = \sum_{i=1}^n C_i \int \mathbf{1}_{E_i}(\omega) dP = \sum_{i=1}^n C_i P(E_i).\]
+\end{itemize}
+
+\subsection{Measurable Functions and Integration}
+Let $f : \Omega \to [0, \infty)$ be a measurable function. Then:
+\[\int f dP := \sup \left\{ \int_\Omega f_n(\omega) dP \ : \ 0 \leq f_n \text{ simple}, f_n \uparrow f \text{ a.s.} \right\}.\]
+\subsection{Integrable Functions}
+For a measurable function $f : \Omega \to \mathbb{R}$, we can write $f = f^+ - f^-$, where both $f^+$ and $f^-$ are nonnegative functions. Specifically:
+\[f^+(x) := \max(f(x), 0), \quad f^-(x) := f^+ - f.\]
+\textbf{Integrable functions:} If both $\int f^+ \, dP$ and $\int f^- \, dP$ are finite, then $f$ is called \textbf{integrable}. Furthermore, we define:
+\[\int f \, dP := \int f^+ \, dP - \int f^- \, dP, \quad \text{and} \quad \int |f| \, dP = \int f^+ \, dP + \int f^- \, dP.\]
+
+\subsection{Convergence of Integrals}
+\begin{example}
+Consider the Lebesgue measure on the unit interval $([0, 1], \mathcal{M}, m)$. Define
+\[X_n(\omega) := n \mathbf{1}_{[0,1/n)}(\omega)\]
+on $[0, 1]$ for $n \in \mathbb{N}$. Then:
+\[\int_{[0,1]} X_n \, dm = n \times \frac{1}{n} = 1 \quad \forall n.\]
+Thus, $\lim_{n \to \infty} \int X_n \, dm = 1$.
+
+Now, for every $\omega > 0$, there exists $N \in \mathbb{N}$ such that $\frac{1}{N} < \omega$, implying $X_n(\omega) = 0$ for all $n \geq N$. Hence, $X_n(\omega) \to 0 \ \forall \ \omega > 0$. Therefore, $m(X_n \to 0) = m((0, 1]) = 1$, i.e., $X_n \to 0$ a.s.
+
+However:
+\[\int \lim_{n \to \infty} X_n \, dm = 0 \neq 1 = \lim_{n \to \infty} \int X_n \, dx.\]
+\end{example}
+
+\begin{example}
+Consider the space $(\mathbb{R}, \mathcal{M}, m)$ and define:
+\[X_n(\omega) = \frac{1}{n} \mathbf{1}_{[0,n]}(\omega).\]
+Then:
+\[\int X_n \, dm = \frac{1}{n} \times n = 1 \quad \forall n.\]
+For every $n$, we have $|X_n(\omega)| < \frac{1}{n} \to 0 \ \forall \ \omega \in \mathbb{R}$. Hence:
+\[\int \lim_{n \to \infty} X_n \, dm = \int 0 \, dm = 0 \neq 1 = \lim_{n \to \infty} \int X_n \, dm.\]
+\end{example}
+
+\subsection{Bounded Convergence Theorem}
+Let $\{X_n\}$ be a bounded sequence of measurable functions on $(\Omega, F, \mu)$, i.e., $\sup_{n,\omega} |X_n(\omega)| < \infty$. If $\mu(\Omega) < \infty$ and $X_n \to X$ pointwise, then:
+\[\lim_{n \to \infty} \int_\Omega X_n \, d\mu = \int_\Omega \lim_{n \to \infty} X_n \, d\mu.\]
+
+\subsection{Absolute Continuity of Measures}
+Let $\mu_1$ and $\mu_2$ be measures on $(\Omega, F)$. We say $\mu_1 \ll \mu_2$ (i.e., $\mu_1$ is absolutely continuous with respect to $\mu_2$) if $\mu_2(A) = 0$ implies $\mu_1(A) = 0$ for all $A \in F$.
+
+\begin{example}
+Consider a nonnegative bounded measurable function $f : \Omega \to \mathbb{R}$ with respect to a measure space $(\Omega, F, \mu_2)$. Define, for every $A \in F$:
+\[\mu_1(A) = \int_A f \, d\mu_2.\]
+If $\mu_2(A) = 0$, then:
+\[\mu_1(A) = \int_A f \, d\mu_2 = \sup \int_A f_n \, d\mu_2, \quad 0 \leq f_n \uparrow f.\]
+Thus, $\mu_1(A) = 0$, implying $\mu_1 \ll \mu_2$.
+\end{example}
+
+\subsection{Radon-Nikodym Theorem}
+Assume $(\Omega, F)$ is a measurable space and $\mu_1, \mu_2$ are $\sigma$-finite measures such that $\mu_1 \ll \mu_2$. Then there exists a nonnegative measurable function $f$ such that:
+\[\mu_1(A) = \int_A f \, d\mu_2 \quad \forall A \in F.\]
+If $g_1 = g_2$ a.e., we write $g_1 \equiv g_2$. Clearly, $\equiv$ is an equivalence relation. Let $[g]$ denote the equivalence class containing $g$. Then $[f] := \frac{d\mu_1}{d\mu_2}$ is called the \textit{Radon-Nikodym derivative} of $\mu_1$ with respect to $\mu_2$.
+\\ \\
+Since \(\mu(A) = \int_A 1 \, d\mu\), it follows that \(\frac{d\mu}{d\mu} = 1\) almost everywhere (a.e.).
+
+\subsection{Fatou's Lemma}
+
+If every \( f_n \) in the sequence is restricted to be non-negative, then:
+
+\[\int \lim_{n \to \infty} f_n \leq \lim_{n \to \infty} \int f_n.\]
+\subsection{Monotone Convergence Theorem }
+To ensure the equality, one can impose the condition that \( f_n \) is less than or equal to its limit. Indeed, if every \( f_n \) is such that \( f_n \leq \lim_{n \to \infty} f_n \), then:
+
+\[\int f_n \leq \int \lim_{n \to \infty} f_n \quad \forall n\]
+
+Thus:
+
+\[\lim_{n \to \infty} \int f_n \leq \int \lim_{n \to \infty} f_n.\]
+
+Fatou's Lemma states:
+
+\[\int \lim_{n \to \infty} f_n \leq \lim_{n \to \infty} \int f_n.\]
+
+Therefore, combining these results:
+
+\[\int \lim_{n \to \infty} f_n = \lim_{n \to \infty} \int f_n.\]
+
+This is precisely the statement of the \textbf{Monotone Convergence Theorem (MCT)}. However, this condition is quite restrictive. Therefore, a more general result, the Lebesgue Convergence Theorem, is needed.
+
+\subsection{Lebesgue Convergence Theorem}
+
+Let \( g \) be integrable over \( E \), and let \( f_n \) be a sequence of measurable functions such that \( |f_n| \leq g \) on \( E \) and \( f_n(x) \to f(x) \) for almost every \( x \). Then:
+
+\[\int f = \lim_{n \to \infty} \int f_n.\]
+
+This theorem can be generalized by relaxing the requirement \( |f_n| \leq g_n \), where \( g_n \to g \) and \( g \) is integrable with:
+
+\[\lim_{n \to \infty} \int g_n = \int g.\]
+\subsection{Lim Sup and Lim Inf}
+Let $A_n$ be any sequence $\in \Omega$ \\ \\
+$$\limsup = \overline{lim}_{n \to \infty} = \bigcap_{k=1}^{\infty} \bigcup_{n=k}^{\infty} A_n$$
+\\
+$$\liminf = \underline{lim}_{n \to \infty} = \bigcup_{k=1}^{\infty} \bigcap_{n=k}^{\infty} A_n$$
+
+\subsection{Monotonic Sequence }
+A sequence $\{A_n\}$ is called \textbf{Monotonic sequence} if 
+\begin{itemize}
+    \item $A_n \subset A_{n+1}$  for all $n \in \mathbb{N}$
+    \item $A_{n+1} \subset A_{n}$  for all $n \in \mathbb{N}$
+\end{itemize}
+
+\subsection{Monotone Class}
+Let $m \in P(\Omega)$. then $m$ is called \textbf{monotone class} if monotone sequence $\{A_n\} \in m \implies \lim A_n \in m$  
+\begin{example}
+    \begin{itemize}
+        \item every $\sigma$ algebra is a monotone class.
+        \item If $\Omega = [0,1] $then $ m = \{ [0,1/2], [1/2,1]\} $ is a monotone class. 
+    \end{itemize}
+\end{example}
+
+\begin{lemma}
+    If $\mathcal{A}$ is an algebra and a monotone class then $\mathcal{A}$ is a $\sigma$ algebra.
+\end{lemma}
+\begin{proof}
+    Let $\{A_n\} $ be in $\mathcal{A} $. Then $B_n = \bigcup_{k=1}^n A_n$ is a monotone sequence $\in \mathcal{A} \implies \lim B_n \in \mathcal{A} \implies \bigcup_{k=1}^{\infty} A_n \in \mathcal{A}$.
+\end{proof}
+\begin{theorem}[Monotone Class Theorem]
+    If $\mathcal{A} $ is an algebra. Then $m(\mathcal{A}) = \sigma (\mathcal{A})$.
+\end{theorem}
+\begin{proof}
+    We know $\mathcal{A} \subseteq m(\mathcal{A}) \subseteq \sigma (\mathcal{A})$ 
+    \\ We need to prove that $m(\mathcal{A} ) \supseteq \sigma (\mathcal{A} )$ i.e. $m(\mathcal{A} )$ is a $\sigma$ algebra or merely an algebra by the previous lemma.
+    \\ For any B, set $D_B = \{ A: A \cap B^c \in m(\mathcal{A}), A^c \cap B \in m(\mathcal{A}) ,A\cup B \in m(\mathcal{A} )\}$
+    \begin{itemize}
+        \item \textbf{$D_B$ is a monotone class}\\ \\
+             If $A_n \in D_B , A_{n+1} \subset A_n, A= \bigcap_{n=1}^{\infty} A_n $, Then $\{ A_n^c \cap B \}, \{ A_n \cap B^c \} ,\{ A_n \cup B \}$ are monotone sequences in $m(\mathcal{A} )$. \\
+             Thus $\{ A^c \cap B \}, \{ A \cap B^c \} ,\{ A \cup B \}$ are in $m(\mathcal{A} )$. Thus A is in $D_B$\\
+             Similarly, For increasing $\{ A_n\}$, $A \in D_B $.
+        \item \textbf{$\mathcal{A} $ is in $D_B$}
+        \\
+        If $B \in \mathcal{A} \implies \mathcal{A} \subset D_B $ as $\mathcal{A} $ is an algebra. \\
+        $\implies m(\mathcal{A} ) \subset D_B \forall B \in \mathcal{A} $ 
+        \item $\mathbf{m(\mathcal{A} ) \subset D_B \forall B \in m(\mathcal{A}) }$
+        $A \in D_B \iff B \in D_A$  Thus $B \in m(\mathcal{A} )$ 
+        \item Thus if $B,A \in m(\mathcal{A} )$ then, $\{ A^c \cap B \}, \{ A \cap B^c \} ,\{ A \cup B \}$ are in $m(\mathcal{A} )$. \\
+        \\ Hence $m(\mathcal{A} )$ is an algebra and by previous lemma, The theorem is proved. 
+    \end{itemize} 
+\end{proof}
+\subsection{$\pi $ Class}
+A collection $\mathcal{A} $ of subsets of $\Omega$ is called a ${\pi}$ class if $A,B \in \mathcal{A} \implies A \cap B \in \mathcal{A} $
+\subsection{$\lambda$ Class}
+A collection $\mathcal{A} $ of subsets of $P(\Omega)$ is called a $\lambda$ class if:
+\begin{itemize}
+    \item $\Omega \in \mathcal{A} $
+    \item If $A,B \in \mathcal{A} $ and $A \subset B \implies B/A \in \mathcal{A} $  
+    \item If $A_n$ is an increasing sequence in $\mathcal{A} $ then $\lim_{n \to \infty} A_n \in \mathcal{A} $ i.e. $\bigcup_{n\geq 1} A_n \in \mathcal{A} $     
+\end{itemize}
+
+\begin{lemma}
+    If A is in $\mathcal{A} $. Then $A^c \in \mathcal{A} $
+\end{lemma}
+\begin{proof}
+    As $A,\Omega \in \mathcal{A} $ and $A \subset \Omega \implies \Omega/A=A^c \in \mathcal{A} $ 
+\end{proof}
+\begin{lemma}
+    If $A,B \in \mathcal{A} $ and $B\subset A_c$ then $A \cup B \in \mathcal{A} $. 
+\end{lemma}
+\begin{proof}
+    If $B \in A^c $ thus, $A^c/B \in \mathcal{A} \implies A^c \cap B^c \in \mathcal{A} \implies A\cup B \in \mathcal{A} $  
+\end{proof}
+
+\begin{theorem}
+    If a $\pi$ class is a $\lambda $ class then it is a $\sigma$ algebra.
+ 
+\end{theorem}
+\begin{proof}
+    Follows from definitions.
+\end{proof}
+\begin{theorem}
+    If a $\pi $ class $\mathcal{A} $contains a $\lambda$ class $\mathcal{D} $ then 
+\begin{itemize}
+    \item $\sigma(\mathcal{D} ) \subset \mathcal{A} $
+    \item $\lambda(\mathcal{D} ) = \sigma(\mathcal{D} )$ \textbf{[Dynkin's $\pi - \lambda $ Theorem]}
+\end{itemize}
+\end{theorem}
+\begin{proof}
+    1) Consider $\mathcal{G} = \lambda(\mathcal{D} )$. We need to prove that $\mathcal{G}$ is a $\pi $ class.
+    Construct $\mathcal{G}_1 = \{ A \in \Omega : A \cap D \in \mathcal{G} \forall d \in \mathcal{D}  \}$ 
+    \\ Verify that $\mathcal{G}_1 $ is a $\lambda $ class. $\therefore \mathcal{G}_1 \supset \mathcal{G} \supset \mathcal{D}$\\
+    Define  $\mathcal{G}_2 = \{ A \in \Omega : A \cap B \in \mathcal{G} \forall B \in \mathcal{G}  \}$ 
+\\Thus  $\mathcal{G}_2$ is a $\lambda $class as before with $\mathcal{G}_2 \supset \mathcal{G} \supset \lambda(\mathcal{D})$
+\\ thus $( A \in \mathcal{G}_2 \implies A\cap B \in \mathcal{G}  \forall B \in \mathcal{G}  )$
+\\ thus $( A \in \mathcal{G} \implies A\cap B \in \mathcal{G}  \forall B \in \mathcal{G}    )$
+\\ \\ Hence $\mathcal{G} $ is a $\pi $ class proving part 1.
+ 2) As $\lambda(\mathcal{D} )$ is a $\lambda $ class hence $\lambda(\mathcal{D} ) \supset \sigma(\mathcal{D} )$. But $\sigma(\mathcal{D} )  $ is also $\lambda $ class containing $\mathcal{D} $. Hence $\lambda(\mathcal{D} ) \subset \sigma(\mathcal{D} )$ 
+ 
+ $$\implies \lambda(\mathcal{D} ) = \sigma(\mathcal{D} )$$
+\end{proof}
+\section{Random variable}
+\subsection{$\sigma$ algebra generated by random variable}
+Let $X: \Omega \mapsto \mathbb{R}. \sigma (X)$ is the smallest $\sigma$ algebra on $\Omega$such that X is measurable w.r.t $(\Omega, \sigma (X))$.
+\begin{example}
+    Let $\omega$ = [0,1] and $X(\omega)=1_{[0,\frac{1}{2}]} \forall \omega \in [0,1]$. Then $\sigma(X) = \{ \phi , [0,\frac{1}{2}] , (\frac{1}{2},1] , [0,1] \}$
+\end{example}  
+\subsection{Independent Events}
+Let A,B be in $\mathcal{F} $, Then A,B are called \textbf{independent event } if $$P(A\cap B) = P(A)P(B)$$
+
+\subsection{Independent $\sigma $-Algebra }
+Two $\sigma $-algebra $\sigma(X),\sigma (Y)$ are called independent $\iff $ A,B are independent for all $A \in \sigma(X),  B \in \sigma (Y)$
+\subsection{Independent Random Variable }
+Let X,Y be 2 random variable then X,Y are independent $\iff \sigma(X) , \sigma(Y)$ are independent.  
+ \begin{example}
+    Let $([0,1],\mathcal{B},m )$ be the given probability space where $\mathcal{B} , m$ are Borel sigma algebra and measure over [0,1]. \\
+    Set $X: [0,1] \mapsto \mathbb{R} $ by $X(\omega) = 1_{[0,\frac{1}{2}]} (\omega)$ where $1_A$ is the indicator function over A.
+    \\ Construct another random variable Y in same probability space such that X,Y have same distribution and X,Y are independent.    
+
+    $$Y = 1_{[0,\frac{1}{4}]}(\omega) + 1_{(\frac{1}{2}], \frac{3}{4}}(\omega)$$
+ 
+Verify that X,Y are independent. 
+\end{example}
+\subsection{Distribution measure of a random variable(Law)}
+Let X be real valued random variable defined on $(\Omega, \mathcal{F} ,P)$, a probability space. Then the Law is the measure on measurable space $(\mathbb{R}, \mathcal{B}(\mathbb{R}) )$ such that $P_X(A) = P\{\omega : X(\omega) \in A \}$ for each $A \in \mathcal{B}(\mathbb{R}) $.
+
+\subsection{Caratheodory Theorem}
+Let \(\mathcal{A}\) be an algebra of sets  on a space \(\Omega\). Suppose \(\mu_0\) is a pre-measure on \(\mathcal{A}\) (i.e., \(\mu_0: \mathcal{A} \to [0, \infty]\) satisfies countable additivity on disjoint sets in \(\mathcal{A}\)).
+
+Then, there exists a unique measure \(\mu\) defined on the \(\sigma\)-algebra \(\sigma(\mathcal{A})\) such that:
+\[
+\mu|_{\mathcal{A}} = \mu_0.
+\]
+
+\subsection{Cumulative Density Function(CDF)}
+If  X is a real valued random variable Then the CDF of X is the function $F_X : \mathbb{R} \mapsto [0,1]$ given by $F_X(x) = P(X\leq x).$ 
+\subsection{Properties of CDF}
+\begin{itemize}
+    \item nondecreasing
+    \item Right Continuous 
+    \item $\lim_{x \to -\infty} F_X(x ) = 0$ and $\lim_{x \to \infty} F_X(x ) = 1$
+\end{itemize}
+
+\subsection{Existence of a measure for a CDF}
+Let F be the CDF. Then $\mu ((a,b]) = F(b) - F(a) \geq 0$\\
+ By caratheodary theorem, there exists a $P_F$ on $\mathbb{R}$ such that  $P_F((a,b]) = \mu ((a,b]) = F(b)-F(a)$
+\\
+$$P_F((-\infty , x)) = F(x) ,  P_F(\mathbb{R}) = 1$$
+\subsection{Existence of Random Variable for a given CDF}
+Let $(\mathbb{R}, \mathcal{B}(\mathbb{R} ), P_F )$ Let $X: \Omega \to \mathbb{R}$ given by $X(\omega)=\omega$. $$P_X(A)= P\{ \omega: X(\omega) \in A \}= P_F\{\omega: X(\omega) \in A \}= P_F\{\omega: \omega \in A \} = P_F(A) \forall A \in \mathcal{B}(\mathbb{R} )  $$
+$$P(X(\omega)\leq x) = P_F(\omega \leq x) = F(x) \implies F_X = F$$
+
+\subsection{Jump of CDF and countability of Jump points}
+Let F be the CDF , let x be the point of jump then $F(x) \not= F(x-) = \lim_{y\uparrow x} F(y)$
+\\ \\ Let $D_n = \{ x \in \mathbb{R} : F(x) - F(x- ) >\frac{1}{n}\} $
+\\ Since F is non decreasing and has bounded domain of [0,1] . Let assume there are k elements in $D_n$ i.e. $\vert D_n\vert = k$. Then $$k \cdot \frac{1}{n} \leq 1 \implies |D_n| \leq n $$
+ Let $D= \bigcup_{k=1}^{\infty} D_n  \implies D$ is countable. 
+ \\ \\
+ If $x_0$ be a jump point. Then $F(x_0)\not= F(x_0-) $ Thus there exist $n$ such that  $x_0$ be in $D_n \implies x_0 \in D $
+ \\ Define G(x)= $\sum_{y \in D ,y \leq x} (F(y)-F(y-))$. Then G(x) is a peicewise constant function and right continuous. Let $\alpha = \lim_{y \to \infty} G(y)$ 
+ $$F_d(x) \doteq \frac{G(x)}{\lim_{y \to \infty} G(y)} =    \frac{G(x)}{\alpha}$$
+ Define $H(x) = F(x)- G(x) \implies F(x) = H(x) + \alpha \cdot F_d(x)$
+ \\ Let $H(x) = (1-\alpha) F_c(x)$. Thus $$F(x) = (1-\alpha)F_c(x) + \alpha F_d(x) $$
+ Here $F_c $ is a continuous CDF and $F_d$ is a discrete CDF.  
+\section{Conditional Expectation}
+Let $(\Omega,\mathcal{F} ,P)$ be the probability space and X a random variable on it such that $E(|X|) < \infty $. Assume that $\mathcal{G} $ be a sub $\sigma$-algebra of $\mathcal{F} $. Then Let $Z $ be a $\mathcal{G} $ measurable function such that for all $A \in \mathcal{G} $ \[ \int_A Z dP = \int_A X dP \]
+Then Z is said to be the \textbf{Conditional Expectation} of X given $\mathcal{G} $ denoted as $Z = E(X|\mathcal{G} )$.\\ \\
+If $PX(A) := E[X1_A] $ for all $A \in \mathcal{G} $. Thus $PX(A)$ is a signed measure on $(\Omega,\mathcal{G})$. Also $P(A|\mathcal{G}) = P(A) $  is a measure on $(\Omega, \mathcal{G})$. \\
+\\
+Thus $PX\ll P|_{\mathcal{G}}$, Hence By Radon-Nikodym Theorem,
+\[E(X|\mathcal{G} = \frac{dPX}{dP|_{\mathcal{G}}})\]
+Now For $A,B \in \mathcal{F}$,
+\[ E(X|B) := E(X|\sigma(1_B))(B); \]  \[ P(A|B) := E(1_A|B) \] 
+Now consider \[ P(A|B)P(B) = E(1_A|B)P(B)=E(1_A|\sigma(1_B))P(B)+0 \cdot P(B^c) = E(E(1_A|\sigma(1_B))1_B) = E(1_{A \cap B}) = P(A\cap B) \]
+Thus $P(A|B)P(B) = P(A\cap B)$
+\\
+If X is a $\mathcal{G} $ measurable function then $E(X|\mathcal{G} ) = X$
+\begin{theorem}
+    Let $ A \in \mathcal{G} $ and let X be a random variable on $\mathcal{F} $. Then \[ E(1_A X|\mathcal{G} ) = 1_A E(X|\mathcal{G} ) \qquad \qquad a.e. [P|_{\mathcal{G} }]\] 
+\end{theorem}
+\begin{proof}
+    For all $B \in \mathcal{G} $ consider $\int_B E(1_A X|\mathcal{G} ) dP = E(E(1_A X|\mathcal{G} )1_B) = E(1_A1_B X) = E(1_{A\cap B}X) $
+\[ = \int_{A \cap B} X dP = \int_{A\cap B}E(X|\mathcal{G} ) dP  \] as A,B are $\mathcal{G} $ measurable hence $A \cap B$ is also.
+\[ = \int_B 1_AE(X|\mathcal{G} ) dP   \]
+\[ \int_B (LHS -RHS) dP  = 0  \qquad  \forall B \in \mathcal{G}  \]
+\[ LHS =RHS \qquad a.e. [P|_{\mathcal{G} }]\]
+
+Hence Proved.
+
+\end{proof}
+\begin{lemma}
+    Let X be a random variable on $\mathcal{F} $ and $\mathcal{G} $ be a sub sigma algebra of $\mathcal{F} $. Then \[ E(cX|\mathcal{G} ) = cE(X|\mathcal{G} ) \qquad c \in \mathbb{R}  \]
+
+\end{lemma}
+\begin{proof}
+    For all $A \in \mathcal{G} $
+    
+    $\int_A LHS dP= \int_A E(cX|\mathcal{G} ) dP = \int_A cX dP = c\int_A X dP = c\int_A E(X|\mathcal{G} ) dP = \int_A RHS dP$
+\end{proof}
+\begin{lemma}
+    Let $\psi $ be a simple function. Then \[ \psi E(X|\mathcal{G} ) = E(\psi X|\mathcal{G} ) \]
+\end{lemma}
+\begin{proof}
+    Write $\psi = \sum_{i = 1}^{n} c_i1_{A_i}   $  then it follows from the above results.
+\end{proof}
+\begin{theorem}
+    Let Y be a bounded $\mathcal{G} $ measurable function then \[YE(X|\mathcal{G} ) = E(YX|\mathcal{G} )\]
+\end{theorem}
+\begin{proof}
+    We have a simple function approximation of $\psi $ as $\psi_n \uparrow \psi $ where $\psi_n$ are simple $\mathcal{G} $ measurable functions. then the results follows from the dominated convergence theorem.  
+\end{proof}
+
+
+\begin{definition}
+    The family of random variables $\{ X_t,t \in T\}$ is said to be independent if $\{ X^{-1}_t (\mathfrak{B} ), t \in T\}$ forms a family of independent classes of events.
+\end{definition}
+Since a borel measurable function g forms a sub-$\sigma$ algebra of events in $X^{-1}_t(\mathfrak{B}) $.
+\begin{theorem}
+    Let $\{ X_t,t \in T  \}$ be independent random variables. For every $t \in T$, let $g_t$ be a borel measurable function defined on $\mathbb{R} $. Then $\{ g_t(X_t) , t \in T\}$ is also a family of independent random variables.
+
+\end{theorem}
+\begin{proof}
+    First observe that $\sigma(g_t(X_t)) \subset \sigma (X_t)$. \\
+    Now then convert the above problem in the equation of $X_t$ then use independence of $X_t$ then revert the conversion.  
+\end{proof}
+\begin{theorem}
+Let X,Y be two independent random variables. If $E|X|< \infty$ and $E|Y|<\infty$ Then $E|XY|< \infty$ and \[E(XY) = E(X)E(Y) \]
+\end{theorem}
+\begin{proof}
+    \begin{itemize}
+        \item     First consider X,Y are non negetive simple random variable.Then use Simple function formula for both X and Y. the results foolews from simple calculation. 
+        \item Now consider X,Y two non negetive random variables then use simple function approximation.The result follows from Monotone Convergence theorem 
+        \item Now let X,Y be arbitrary random variable. Then write X, Y in terms of $X^+ ,X^-,Y^+,Y^- $ and the result follows from the above results. 
+    \end{itemize}
+\end{proof}
+\begin{theorem}
+    Let $X_1,X_2,\cdots, X_n$ be independent random variables. Let $g_1, \cdots,g_n$ be borel measurable functions on $\mathbb{R}$ such that $E(g_j(X_j)) < \infty$ Then $E(\prod_{j=1}^{n}|g_j(X_j|) < \infty  )$ morover $E[\prod_{j=1}^{n}|g_j(X_j)|] = \prod_{j=1}^{n}E[|g_j(X_j)|]$. THe coverse is also true.    
+\end{theorem}
+\begin{theorem}[Tower Law]
+    If $\mathcal{G}_1 \subset \mathcal{G}_2 \subset \mathcal{F}  \sigma $ algebra. Then \[ E[E(X|\mathcal{G}_2 )|\mathcal{G} _1] = E[X|\mathcal{G} _1] \] 
+\end{theorem}
+\begin{proof}
+    Trivial. Start with the integral of LHS then reach integral of RHS.
+\end{proof}
+\subsection{Orthogonality and Expectation}
+\begin{definition}
+    Let X has finite variance. Let\[ V \doteq \{ X: \Omega \mapsto \mathbb{R}|E(X^2)<\infty \} \textit{ on F measurable functions}\] \[ V_\mathcal{G} \doteq \{ X: \Omega \mapsto \mathbb{R}|E(X^2)<\infty \} \textit{ on G measurable fuctions} \]
+\end{definition}
+\begin{theorem}
+    $E(X|\mathcal{G} )$ is the orthogonal projection of X on $V_\mathcal{G} $
+\end{theorem}
+\begin{proof}
+    Let Y be a $\mathcal{G} $ measurable random variable.\\
+    $E((Y-X)^2) = E(Y-E(X|\mathcal{G} )+E(X|\mathcal{G} ) -X)^2$\\
+    $E((Y-X)^2) - E((E(X|\mathcal{G})-X)^2) - E((Y - E(X|\mathcal{G} ))^2)= 2(E(XE(X|\mathcal{G} )) - E(E(X|\mathcal{G} )^2)) $
+
+Now Using $E(Z) = E(E(Z|\mathcal{G}))$, \\
+\[  E(XE(X|\mathcal{G} )) = E((E(X|\mathcal{G} ))^2)  \]
+Thus $E((Y-X)^2) - E((E(X|\mathcal{G})-X)^2) - E((Y - E(X|\mathcal{G} ))^2) = 0$
+
+Hence Proved.
+\end{proof}
+\subsection{Jensen's Inequality}
+Let $\phi $ be a convex function.Then \[ E[\phi(X)] \geq \phi(E[X])\] 
+\begin{theorem}
+    $V(X)\geq V(E(X|\mathcal{G} )) $
+\end{theorem}
+\begin{proof}
+    $$V(X)- V(E(X|\mathcal{G} )) = E(X^2) - E(E(X|\mathcal{G} )^2)$$
+$$\geq E(X^2) - E(E(X^2|\mathcal{G} )) = 0$$
+Hence Proved.
+\end{proof}
+\begin{theorem}
+    $min_{Y \in V_\mathcal{G}} V(X_Y) = V(X-E(X|\mathcal{G})) $
+\end{theorem}
+\begin{proof}
+    Consider \[ E((Y-X)^2) - E((E(X|\mathcal{G})-X)^2) - E((Y - E(X|\mathcal{G} ))^2) = 0 \]
+and\[ (E[Y-E(X|\mathcal{G} )]^2) = (E[Y-X])^2 \]
+Thus \[ V(Y-X) = V(Y-E(X|\mathcal{G} )) + V(E(X|\mathcal{G} )-X) + (E[E(X|\mathcal{G} )-X])^2 \]
+\[ V(Y-X) \geq V(E(X|\mathcal{G} )-X)  \]
+Hence Proved.
+\end{proof}
+
+\begin{theorem}
+ Let  X  be a real-valued random variable defined on  $(\Omega, \mathcal{F}, P)$ 
+ and let  h  and  g  be both non-increasing or non-decreasing real-valued measurable functions. Then,
+\[
+\mathbb{E}\{h(X)g(X)\} \geq \mathbb{E}\{h(X)\}\mathbb{E}\{g(X)\},
+\]
+\text{provided that all expectations exist and are finite.}
+
+\end{theorem}
+\begin{proof}
+ As both  h  and  g are non-increasing  $(h(x) - h(y))(g(x) - g(y)) \geq 0.$
+ Using this we obtain the following using two independent and identically distributed random variables  X  and  Y.
+\[
+\mathbb{E}[h(X)g(X)] - \mathbb{E}h(X)\mathbb{E}g(X)
+\]
+\[
+= \mathbb{E}[h(X)g(X)] - \mathbb{E}[h(Y)g(X)]
+\]
+\[
+= \mathbb{E}[(h(X) - h(Y))g(X)]
+\]
+\[
+= \mathbb{E}[1_{\{X \geq Y\}}(h(X) - h(Y))g(X)] + \mathbb{E}[1_{\{X \leq Y\}}(h(X) - h(Y))g(X)]
+\]
+\[
+= \mathbb{E}[1_{\{X \geq Y\}}(h(X) - h(Y))g(X)] + \mathbb{E}[1_{\{X \leq Y\}}(h(X) - h(Y))g(X)]
+\]
+\[
+= \mathbb{E}[1_{\{X \geq Y\}}((h(X) - h(Y))g(X) + (h(Y) - h(X))g(Y))]
+\]
+\[
+= \mathbb{E}[1_{\{X \geq Y\}}(h(X) - h(Y))(g(X) - g(Y))] \geq 0.
+\]
+
+\end{proof}
+\begin{theorem}
+    If Z is Independent of X,Y then \[E[X|Y,Z] = E[X|Y]\]
+\end{theorem}
+\subsection{Regular Conditional Probability}
+\textbf{Definition.} \ 
+Let \(\mathcal{F}_1\) and \(\mathcal{G}\) be \(\sigma\)-algebras of events. A conditional probability measure or regular conditional probability on \(\mathcal{F}_1\) given \(\mathcal{G}\) is a function \(P(A, \omega)\) defined for \(A \in \mathcal{F}_1\) and \(\omega \in \Omega\) such that:
+\begin{enumerate}
+    \item For each \(\omega \in \Omega\), \(P(A, \omega)\) is a probability measure on \(\mathcal{F}_1\).
+    \item For each \(A \in \mathcal{F}_1\), \(P(A, \omega)\) is a \(\mathcal{G}\)-measurable function on \(\Omega\), coinciding with the conditional probability of \(A\) given \(\mathcal{G}\), i.e., \(P(A, \omega) = P(A | \mathcal{G})(\omega)\), almost surely.
+\end{enumerate}
+\begin{theorem}
+If for some pair \(\mathcal{F}_1\) and \(\mathcal{G}\) of \(\sigma\)-algebras of events, \(P_{\omega}(A) = P(A, \omega)\) is a regular conditional probability on \(\mathcal{F}_1\) given \(\mathcal{G}\), and \(X\) is an \(\mathcal{F}_1\)-measurable function with \(\mathbb{E}[|X|] \leq \infty\), then
+\[
+\mathbb{E}\{X | \mathcal{G}\}(\omega) = \int X \, dP_{\omega}, \quad \text{a.s.}
+\]
+\[
+(5)
+\]
+\end{theorem}
+\begin{theorem}[Doob]
+If \( X = (X_1, \dots, X_n) \) is a random vector on a probability space \((\Omega, \mathcal{F}, P)\) and \(\mathcal{G}\) is a \(\sigma\)-algebra of events, then there exists a regular conditional distribution for \(X\) given \(\mathcal{G}\).
+\end{theorem}
+\begin{theorem}
+    Let $\mathcal{F}_1,\mathcal{G} \subset \mathcal{F} $. If $P(A,\omega)$ denotes the regular conditiona; probability of $A \in \mathcal{F}_1$ given $\mathcal{G} $ and X is a $\mathcal{F}_1$ measurable function with finite expectation. Then \[E(X|\mathcal{G} )(\omega) = \int_{\Omega} X(\omega') P(d\omega',\omega) \quad a.e. [P|_\mathcal{G} ]\]
+\end{theorem}
+\begin{definition}
+    Let $(\Omega,\mathcal{F},P )$ be the probability space and X be a random vector in $\mathbb{R}^n$ and $\mathcal{G} $ be a sub sigma algebra Then $P_X: \mathcal{B}_{\mathbb{R}^n } \times \Omega \mapsto [0,1]$ is the conditional probability distribution 
+    \begin{itemize}
+        \item $P_X(B<\omega) = P(X^{-1}(B)|\mathcal{G} )(\omega) \qquad \forall B \in \mathcal{B}_{\mathbb{R}^n } $
+        \item $\omega \mapsto P_X(B,\omega)$ is a $\mathcal{G} $ measurable function.
+        \item  $B \mapsto P_X(B,\omega)$ is a measure $\forall \Omega$.
+    \end{itemize}
+\end{definition}
+\begin{theorem}
+    If $\mu$ is a measure on a semi algebra S of subsets of $\Omega$, then there exists a $\nu$ extension of $\mu$ to $\sigma(S)$.\\ If $\mu$ is a probabiity measure then $\nu$ is also a probability measure and is unique.  
+\end{theorem}
+\subsection{n-Dimensional Distribution function}
+The joint Distribution function F satisfies the following Properties:
+\\
+\[
+\lim_{x_j \to -\infty} F(x_1, \dots, x_n) = F(x_1, \dots, x_{j-1}, -\infty, x_{j+1}, \dots, x_n) = 0, \quad 1 \leq j \leq n \tag{1}
+\]
+\[
+\lim_{x_j \to y_j \to x_j} F(x_1, \dots, x_{j-1}, y_j, x_{j+1}, \dots, x_n) = F(x_1, \dots, x_j, \dots, x_n), \quad 1 \leq j \leq n \tag{2}
+\]
+\[
+\Delta_n^{a, b} F \equiv F(b_1, \dots, b_n) 
+- \sum_{j=1}^{n} F(b_1, \dots, b_{j-1}, a_j, b_{j+1}, \dots, b_n)
+\]
+\[
++ \sum_{1 \leq j < k \leq n} F(b_1, \dots, b_{j-1}, a_j, b_{j+1}, \dots, b_{k-1}, a_k, b_{k+1}, \dots, b_n) - \dots
+\]
+\[
++ (-1)^n F(a_1, \dots, a_n) \geq 0, \tag{3}
+\]
+\[
+\lim_{x_j \to \infty} F(x_1, \dots, x_n) = F(\infty, \dots, \infty) = 1, \quad 1 \leq j \leq n \tag{4}
+\]
+\[
+\text{whenever } -\infty \leq a_i \leq b_i \leq \infty, \quad 1 \leq i \leq n.
+\]
+
+\end{document}

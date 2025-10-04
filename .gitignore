@@ -1,0 +1,50 @@
+# LaTeX intermediate and output files
+*.aux
+*.bbl-SAVE-ERROR
+*.bbl
+*.blg
+*.brf
+*.log
+*.nav
+*.out
+*.snm
+*.toc
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.xdv
+*.run.xml
+
+# Editor-specific files
+*.swp
+*.swo
+*~
+.DS_Store
+
+# PDF and backup files
+*.pdf
+*.bak
+*.backup
+
+# Latexmk specific
+latexmkrc
+
+# VS Code / TeXShop / TeXworks / etc.
+.vscode/
+*.tmp
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*.nav
+*.snm
+
+# Output folders (if using)
+build/
+output/

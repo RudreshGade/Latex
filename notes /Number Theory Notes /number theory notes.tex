@@ -1,0 +1,431 @@
+\documentclass{report}
+\usepackage{multirow,booktabs}
+\usepackage[table]{xcolor}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{empheq}
+\usepackage{hyperref}
+\usepackage{blindtext}
+% \hypersetup{
+%     colorlinks=true,
+%     linkcolor=blue,
+%     filecolor=magenta,      
+%     urlcolor=cyan,
+%     pdftitle={Number Theory Notes},
+%     pdfpagemode=FullScreen,
+%     }
+
+
+\newtheorem{defn}{Definition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newcommand\note[1]{\textcolor{blue}{#1}}
+\newtheorem{theorem}{Theorem}[section]
+
+\newcommand{\n}{\mathbb{N}}
+\newcommand{\z}{\mathbb{Z}}
+
+\renewenvironment{proof}{\paragraph{Proof:}}{\hfill$\square$}
+\newenvironment{solution}{\paragraph{Solution:}}{\hfill$\blacksquare$}
+\newenvironment{example}{\paragraph{Example:}}
+
+
+\begin{document}
+\title{Number Theory Notes}
+\author{Rudresh D. Gade}
+\date{\today}
+\maketitle
+\tableofcontents
+
+\begin{chapter}
+    {Primes}
+\end{chapter}
+\section{ Infinitude of primes }
+\lemma{There are infinitely many prime numbers in $\n$.}
+
+\subsection{Euclid's proof}
+\begin{proof}
+    Assume there are finitely many n primes in $\n$. Let them be $p_i$ for $i \in {1,...,n}$ 
+Then consider the no. $q = \prod_{i=1}^{n} p_i  +1$. Now this no. is not divisible by any of the n prime numbers, Hence q must be a prime no. \\ Hence a contradiction to our assumption that there are finitely many prime numbers in $\n$.
+\end{proof}
+
+\subsection{Euler's Proof}
+\begin{proof}
+    
+We know that $\Sigma \frac{1}{n}$ diverges.
+\\
+Now, $$\Sigma \frac{1}{n} = \prod_{p \in P}  \Sigma_{0\leq k} \frac{1}{p^k} = \prod_{p \in P} \frac{1}{1-\frac{1}{p}}$$
+
+if P is a finite set of prime no. in $\n$, Then the above LHS expression is finite. But we know that the RHS is Divergent. 
+\\Hence there are infinetly many prime no. 
+\end{proof}
+
+\begin{lemma}
+    There are infinitely many primes of form 4k+3
+\end{lemma}
+\begin{proof}
+Assume there are finitely many n such primes $p_i$
+    consider N=$4 \cdot \prod_{1}^{n} p_i -1 $ 
+    \\$2\not| N$. Thus there must exist a prime of form 4k+3 which $\not|$ N. \\
+    Hence proved.
+\end{proof}
+
+\begin{theorem}[Dirichlet Theorem]
+    Let (a,b)=1. Then there are infinitely many primes of form ak+b.
+\end{theorem}
+\section{Division Algorithm}
+\begin{theorem}
+    Let a,b $\in \n$ with a$\leq b$. then there exist unique q,r $\in \n$ such that $b = a*q+r$ with $0\leq r<a$.
+\end{theorem}
+\begin{proof}
+    
+ \textbf{Existence:}\\
+consider multiples of a : $a<2a<3a<\cdots$.\\
+Now there exist a $q\in \n$ such that $$q\cdot a \leq b< (q+1)\cdot a$$
+
+
+$$\implies 0\leq b-q\cdot a < a$$
+\\ define $r=b-q\cdot a$
+\\
+thus $$ b = a \cdot q +r$$
+\\ \textbf{Uniqueness:}\\
+Let $$b=a \cdot q_1+r_1 = a\cdot q_2 +r_2$$
+$$\implies r_1-r_2 = (q_2-q_1)a \leq r_1<a$$
+$$\implies q_1= q_2 \implies r_1=r_2$$
+
+\end{proof}
+\section{Greatest Common Divisor(GCD)}
+\begin{theorem}
+    If $a,b \in \n$. Then $\exists d \in \n$ such that $d|a, d|b$ and if $e|a,b$ then $e|d$.
+\end{theorem}
+\begin{proof}
+    Consider the set $X=\{ax+by\in \n|x,y\in \z\}$
+    let $d=a\alpha+b\beta$ be the smallest no. of X set. if $e|a,e|b \implies e|d$
+    Now consider a =qd+r for some q,r$\in \n$
+    \\
+$$r=a-qd= a(1q\alpha)-bq\beta \in X$$
+Thus $r<d \in X  \implies\impliedby$ that d is smallest element in X.Thus r = 0. \\
+Hence a=qd. Similarly $d|b$
+
+\end{proof}
+
+\subsection{Euclid's Lemma}
+\begin{lemma}
+    if $p|m\cdot n \implies p|m$ or $p|n$ where p is prime.
+\end{lemma}
+\begin{proof}
+    Let $p|m\cdot n$and $p\not| m$.
+    Since p is prime, (p,m)=1
+    \\
+    Thus $$1=p\alpha+m\beta$$
+    $$n=np\alpha+nm\beta$$
+    $$\implies p|n$$
+\end{proof}
+\section{Fundamental Theorem of Arthemetic}
+\begin{theorem}
+    Every natural no. $n>1$ admits a unique factorisation .$$n=\prod_{i=1}^{k} p_{i}^{n_i}$$
+\end{theorem}
+
+
+
+\begin{chapter}
+    {Congruences}
+\end{chapter}
+\section{Congruence}
+ \begin{defn}
+     Let n $\in \n$ be fixed. we say $a \equiv b (\textrm{mod}\ n) $ iff $n|(b-a)$  
+ \end{defn}
+
+$\cdot$ The congruence relation($\equiv$) is an equivalence relation.
+\\
+$\cdot$ The set of congruence classes modulo n is $\{ 0,1,2,\cdots ,n-1\}$
+
+\begin{lemma}
+    If $a \equiv b;c\equiv d (\textrm{mod}\ n)$. Then 
+$$a\pm c\equiv b \pm d (\textrm{mod}\ n)$$
+$$a\cdot c \equiv b \cdot d (\textrm{mod}\ n)$$
+\end{lemma}
+\begin{proof}
+    as $a \equiv b;c\equiv d (\textrm{mod}\ n)$,
+    $$a-b=n\alpha;c-d=n\beta$$
+    $$\implies a-c-b+d=n(\alpha-\beta)$$
+    $$\implies a-c \equiv b-d (\textrm{mod}\ n)$$
+    Similarly we get $\implies a+c \equiv b+d (\textrm{mod}\ n)$
+
+    $$a\cdot c=b\cdot d+nk (\textrm{mod n})$$
+    $$\implies ac \equiv bd (\textrm{mod n})$$
+\end{proof}
+
+\begin{lemma}
+    if f(x) is a polynomial and f(a)=0 for some a$\in \z$. Then $f(a)\equiv 0 \forall n\in \n$
+\end{lemma}
+\begin{lemma}
+    if ab $\equiv ac (\textrm{mod n})$and (a,n)= 1. Then $b\equiv c (\textrm{mod n})$
+\end{lemma}
+\begin{proof}
+    (a,n)=1 and $ab\equiv ac (\textrm{mod n})$ $$\implies 1= a\alpha+n\beta$$
+    $$b= ba\alpha+bn\beta : c=  ca\alpha+cn\beta$$
+    $$b-c= (ab-ac)\\alpha + n(k)$$
+    $$\implies b \equiv c  (\textrm{mod n}) $$
+    
+\end{proof}
+\section{Residue class}
+\begin{defn}
+    \textbf{congruent class}: $$[a]= \{b:a\equiv b(\textrm{mod n}\})$$
+\end{defn}
+
+These classes are a partition of $\n$.\\
+if $a\in \n$. then $$[a]\in \{[0],[1],[2],\cdots,[n-1]\} (\textrm{mod n})$$
+These are called the \textbf{residue classes}
+
+    \note{It is very important to check for well-definedness for the residue classes for a given question.}
+    \\
+example: Is $ [a]^b = [a^b] well-defined?$ YES!
+\\
+example: Is $ [a]^[b] = [a^b] well-defined?$ NO! (give an example for it )
+\begin{example}
+    Prove that there is no nonconstant polynomial function f(x) with integer coefficient which takes only prime values.
+\end{example}
+\begin{proof}
+    Lets assume there exist such a function f(x). let f(a)=p for some a,p where p is prime.\\
+    if $b=a+k\cdot p$, then $a\equiv b (\textrm{mod n})$\\
+    thus $f(b)\equiv f(a) = p \equiv 0 (\textrm{mod n}) \implies f(b)=p \forall k \in \z $
+    \\Thus f(x)= p has infiinitely many solutions $\implies \impliedby $
+    
+\end{proof}
+\section{Linear solution to congruence}
+\begin{theorem}
+    The linear congruence $ax\equiv b (\textrm{mod n})$ has solutions iff (a,n)=d$|$b
+\end{theorem}
+\begin{proof}
+    $(\implies)$We assume $ax\equiv b (\textrm{mod n})$ has solution say $k\in \n $.
+    $$n|ak-b \implies ak-b=n\alpha$$
+    $$\implies b=ak-n\alpha$$
+    as (a,n)=d,$$d|ak-n\alpha\implies d
+|b$$
+$(\impliedby)$ let (a,n)=d$|$b,
+\\then $$d=a\alpha+n\beta | b$$
+$$ka\alpha+kn\beta=b$$
+$$ak\alpha\equiv b (\textrm{mod n})$$
+$\implies k\alpha$ is a solution.
+\end{proof}
+\\ \\ \\
+\note{If d=1, then $\exists$  solution $\forall b \in \n$ }
+
+\begin{lemma}
+    If $x_0$ is a solution for the $ax\equiv b ( \textrm{mod n})$. THen $x_0 + t\cdot \frac{n}{t}$ is also a solution $\forall t\in \z$
+\end{lemma}
+\begin{proof}
+    let $x_0$ be a solution.\\
+    consider $x_1=x_0 +t\cdot \frac{n}{t}$
+    $$ax_1\equiv ax_0 +at\cdot \frac{n}{t}=ax_0+knt\equiv ax_0\equiv b (\textrm{mod n})$$
+    Thus $x_1$ is also a solution.
+    \\
+    let $x_1,x_0$ be two solutions,
+    \\
+    $$ax_0\equiv ax_1 (\textrm{mod n})$$
+    $$nt=a(x_0-x_1)$$
+    $$\implies \frac{n}{d} | \frac{a}{d}\cdot (x_0-x_1)\implies \frac{n}{d}|(x_0-x_1)$$
+    $$\frac{nt}{d}=x_0-x_1$$
+
+    Thus all solution are of form $x_0 -\frac{nt}{d}$
+\end{proof}
+
+\begin{example}
+    find solution of $7x\equiv 3 (\textrm{mod 12})$
+\end{example}
+
+\begin{solution}
+    d=(7,12)=1
+    \\ Thus solution exists and is unique.
+    $$7^{-1}\equiv 7 \textrm{mod 12}$$
+    $$49x\equiv 21$$
+    $$x\equiv 9$$
+\end{solution}
+
+\begin{lemma}
+    Let m divide each of a,b,n and let a'=$\frac{a}{m},b'=\frac{b}{m},n'=\frac{n}{m}$. Then $ax\equiv b(\textrm{mod n}) $ has a solution iff $a'x\equiv b' (\textrm{mod n'})$ has a solution. 
+\end{lemma}
+\begin{proof}
+Let $\alpha$ be a solution of $a'x\equiv b' (\textrm{mod n'})$, Then $$n'|a'\alpha - b' \iff \frac{n}{m}|\frac{a\alpha - b}{m}$$
+$$\iff n|a\alpha-b$$
+$$\iff ax\equiv b(\textrm{mod n}) $$
+\end{proof}
+\begin{lemma}
+    Let (a,n)=1 .Let m|$a,b$ and  a'=$\frac{a}{m},b'=\frac{b}{m}$.Then $ax\equiv b(\textrm{mod n}) $ has a solution iff $a'x\equiv b' (\textrm{mod n})$ has a solution.  
+\end{lemma}
+\begin{proof}
+    $(\implies )$ Let $ax\equiv b(\textrm{mod n}) $ has a solution.$$n|a\alpha-b$$
+    $$nk=a\alpha-b; a=a'm,b=b'm$$
+    $$nk=m(a'\alpha-b')$$
+    $$\implies m|nk ;m\not| n$$
+    $$m|k \implies nk'=a'\alpha-b'$$
+$$a'\alpha\equiv b' (\textrm{mod n})$$
+$(\impliedby)$Let $\alpha$ be a solution of $a'x\equiv b' (\textrm{mod n})$, Then $$n|a'\alpha - b' \iff n|\frac{a\alpha - b}{m}$$
+$$\iff nm|a\alpha-b$$
+$$\iff nmk= a\alpha-b$$
+$$\iff a\alpha\equiv b(\textrm{mod n}) $$
+
+\end{proof}
+\begin{example}
+    Find solution of $12x\equiv 18 (\textrm{mod 22})$
+\end{example}
+\begin{solution}
+    d=(12,22)=2
+    $$\implies 6x\equiv 9 (\textrm{mod 11})$$
+    $$\implies 2x\equiv 3 (\textrm{mod 11})$$
+    Now $2^{-1}\equiv -5\equiv 6 (\textrm{mod 11})$
+    $$\implies x\equiv 3*6 (\textrm{mod 11})$$
+    $$x\equiv 18 \equiv 7 (\textrm{mod 11})$$
+
+    Thus the solutions are 7,18.
+
+    
+\end{solution}
+
+\section{Chinese Remainder Theorem}
+\begin{theorem}
+    Let $n_1,n_2,\cdots , n_k \in \n $ with ($n_i,n_j$) =1 $\forall i\not= j$.  Let $a_1,a_2,\cdots , a_k \in \n $. Then the system $x\equiv a_i \textrm{(mod $n_i$)} \forall i \in \{ 1,2,\cdots,k\}$ has a unique solution mod $n = \prod_{i=1}^k n_i$
+    
+\end{theorem}
+\begin{proof}
+\textbf{Existence}:
+    Consider the following congruence equations, 
+    $$x_i \equiv 1 \textrm{(mod $n_i$)}\hspace{3mm};\hspace{2mm} x_i \equiv 0 (\textrm{mod $n_j)$}\hspace{4mm}  \forall j \not= i \in \{ 1,2,\cdots,k\}$$
+    Define $$c_i = \frac{\prod_{i=1}^k n_i}{n_i}$$
+    Observe ($c_i,n_i$)= 1,
+    $$x_i \equiv 1 \textrm{(mod $n_i$)}\hspace{3mm};\hspace{2mm} x_i \equiv 0 (\textrm{mod $n_j)$}$$
+    $$ implies c_i\cdot k_i \equiv 1 \textrm{$(mod n_i)$ } \forall i \in \{ 1,2,\cdots,k\} $$
+    Solution to each of these equation exist as ($c_i,n_i$) = 1.    
+    Now consider $x=\sum_{i=1}^k a_ix_i$, then x is a general solution to the given problem.   
+\\
+\textbf{Uniqueness}:
+if $\alpha, \beta \in Z$ such that $\alpha \equiv a_i \textrm{(mod $n_i$)} \hspace{4mm} ; \hspace{3mm} \beta \equiv a_i \textrm{(mod $n_i$)} $
+\\
+Then $\alpha - \beta \equiv 0 \textrm{(mod $n_i$)} \implies \alpha \equiv \beta \textrm{(mod n)}$
+\\
+Hence the solution is unique mod n.
+
+\end{proof}
+
+
+\begin{example}
+    $x \equiv 1(4)$,$x \equiv 2 (3)$, $x \equiv 3(5)$
+\end{example}
+\begin{solution}
+    $(n_1,n_2,n_3)=(4,3,5)$;$(a_1,a_2,a_3)= (1,2,3)$;$(c_1,c_2,c_3)= (15,20,12)$
+    \\
+    \begin{align*}
+        15k_1 \equiv 1 (4) &\hspace{4mm}; 20k_2 \equiv 1 (3) &; 12k_3 \equiv 1 (5)\\
+        k_1 \equiv 3 (4)   &\hspace{4mm}; k_2 \equiv 2 (3) &; k_3 \equiv  3 (5)
+    \end{align*}
+        
+  
+    $(k_1,k_2,k_3)= (3,2,3)$\\ \\
+    $(x_1,x_2,x_3)= (45,40,36)$\\ \\
+    $x= \sum_{i=1}^3 a_ix_i = 233 \equiv 53 (n=60)$\\ 
+
+    $x\equiv 53(60)$ is the solution.
+    \end{solution}
+
+
+\begin{example}
+    $7x\equiv 3(12); 10x\equiv 6(14)$
+\end{example}
+\begin{solution}
+     \begin{align}
+         7x\equiv 3(12)&; 10x\equiv 6(14)\\
+         x \equiv 21 \equiv 9 (12)&; 5x \equiv 3(7)\\
+         x \equiv 9 (12) &; x \equiv 2 (7)
+     \end{align}
+         
+     Now $(c_1,c_2) = (7,12)$\\
+     $(k_1,k_2)= (7,3) \implies (x_1,x_2)= (49,36)$\\
+     $x= 513(n=84)\equiv 9 (84)$
+\end{solution}
+\begin{example}
+ $13x \equiv 71(380)$    
+\end{example}
+\begin{solution}
+    $380=4*5*19$\\ \\
+    \begin{align}
+    \therefore 13x \equiv 71(380) &\iff 13x \equiv 71(4)(5)(19)\\
+    (k_1,k_2,k_3)= (3,1,1) &\implies (x_1,x_2,x_3)= (285,76,20)\\
+    x=1087 (n=380) &\equiv 327 (380)     
+    \end{align}
+   
+\end{solution}
+\newpage
+\section{Square root of 1 in $\z_n$}
+\begin{lemma}
+    If $a \in \n $ is a solution to $x^2\equiv 1 \textrm{ mod $p^e$}$, where p is an odd prime. Then $a \equiv \pm 1 \textrm{ mod $p^e$}$ 
+\end{lemma}
+\begin{proof}
+    Let a be such a solution, THus $$p^e|a^2-1$$\\
+    
+   If $$p^e|(a+1)  \textrm{ and } p^e|(a-1)$$
+   $$\implies p^e|(a+1)-(a-1)=2 \impliedby$$
+   Hence $$p^e|(a+1)  \textrm{ or } p^e|(a-1)$$
+   $$a\equiv \pm 1 \textrm{ mod $p^e$}$$
+   
+\end{proof}
+\begin{lemma}
+    If $a \in \mathbb{N}$ is a solution to $x^2\equiv 1 \pmod{p^e}$, where $p = 2$. Then the solutions are as follows :
+    $
+    \begin{cases}
+            1 & e=1\\
+            \pm 1 & e=2\\
+            \pm 1, 2^{e-1}\pm1 & e\geq 3
+    \end{cases}
+    $
+\end{lemma}
+\begin{proof}
+    \begin{enumerate}
+        \item If e =1 $\implies n=p^e=2$
+           the only solution is $x \equiv 1 \textrm{ mod 2}$
+        \item if e=2, $n=p^e=4$
+        the solutions are $x\equiv \{ 1,3,5,7\} \textrm{ mod 4}$
+        \item if $e\geq 3$,\\
+         Let a be such a solution,$$a^2-1\equiv 0 (n)$$
+         $$(a+1(a-1)= k\cdot2^e$$
+         Thus a is an odd no.
+         but only one of a+1 and a-1 is divisible by 4 as $4\not| (a+1)-(a-1)=2$ 
+\begin{enumerate}
+    \item if $4|a+1 \implies 2^{e-1}|a+1 \implies a \equiv 1\textrm{ mod $2^{e-1}$} $
+    \item if $4|a-1 \implies 2^{e-1}|a-1 \implies a \equiv -1\textrm{ mod $2^{e-1}$} $ 
+\end{enumerate}
+Thus the only solutions are $\{1,2^{e-1}-1,2^{e-1}+1,2^e-1\}$
+        
+    \end{enumerate}
+\end{proof}
+\begin{theorem}
+   
+If a $\in \mathbb{N}$ is a solution of $x^2\equiv 1 \mod n$, where n= $\prod_i p_i^{n_i}$. Then the no. of solutions are as follows:
+$\begin{cases}
+    2^k & \textrm{  if  } 2\not| n\\
+    2^{k-1} & \textrm{  if  } 2|n \textrm{  but  } 4\not| n\\
+    2^{k-1} & \textrm{  if  } 4|n \textrm{  but  } 8\not|n\\
+    2^{k+1} &\textrm{  if  } 8|n
+\end{cases}
+$
+\end{theorem}
+\begin{proof}
+\begin{itemize}
+    \item  If n is odd, Then $$a\equiv \pm 1 \textrm{  mod $p_i^{n_i}  $  }; \forall i   $$ 
+    Each of the above has a unique solution thus having total $2^k$ solutions.
+    \item if $2|n$ but $4\not|n$, Then $n=2\cdot \prod_i p_i^{n_i}$ where $p_i $ are all odd.
+    Thus having 1 solution for $p_1=2$ and $2^{k-1}$ solutions for $\prod_i p_i^{n_i}$. hence $2^{k-1}$ solutions for n. 
+    \item if $4|n$ but $8\not|n$, Then $n=4\cdot \prod_i p_i^{n_i}$ where $p_i $ are all odd.
+    Thus having 2 solution for $p_1=2$ and $2^{k-1}$ solutions for $\prod_i p_i^{n_i}$. hence $2^{k}$ solutions for n.
+    \item if $8|n$ , Then $n=8\cdot k \cdot \prod_i p_i^{n_i}$ where $p_i $ are all odd.
+    Thus having 4 solution for $p_1=2$ and $2^{k-1}$ solutions for $\prod_i p_i^{n_i}$. hence $2^{k+1}$ solutions for n. 
+ \end{itemize}
+   
+\end{proof}
+
+
+
+
+\end{document}
